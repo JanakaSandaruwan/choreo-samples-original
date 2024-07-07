@@ -1,0 +1,16 @@
+apiVersion: core.choreo.dev/v1beta1
+kind: ComponentConfig
+spec:
+  outbound:
+      serviceReferences:
+      - name: choreo:///janakasandaruwan/g6qt/tbrqqt/5c69c/v1/PUBLIC
+        connectionConfig: 01ef3c7b-17d1-120e-abde-1713f592c8ac
+        env:
+        - from: ServiceURL
+          to: API
+        - from: ConsumerKey
+          to: KEY
+        - from: ConsumerSecret
+          to: SECRET
+        - from: TokenURL
+          to: TOKEN_URL
