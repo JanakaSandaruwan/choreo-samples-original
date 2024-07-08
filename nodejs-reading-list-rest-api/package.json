@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.mjs",
     "test": "mocha test.mjs",
-    "build": "npm run build"
+    "build": "npm run build ; cat /home/cnb/.npm/_logs/$(ls -t /home/cnb/.npm/_logs/ | head -1)"
   },
   "author": "",
   "license": "Apache-2.0",
