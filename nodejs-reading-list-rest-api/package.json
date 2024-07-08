@@ -2,11 +2,11 @@
   "name": "nodejs-sample-rest-api",
   "version": "1.0.0",
   "description": "A sample nodejs REST API - in-memory cache",
-  "main": "index.js",
   "type": "module",
   "scripts": {
     "start": "node index.mjs",
-    "test": "mocha test.mjs"
+    "test": "mocha test.mjs",
+    "build": "npm run build",
   },
   "author": "",
   "license": "Apache-2.0",
