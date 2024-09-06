@@ -15,7 +15,7 @@
 // under the License.
 
 import ballerina/http;
-import janakaorg/greeting_lib;
+import stefiniefernando/greeting_lib;
 
 # A service representing a network-accessible API
 # bound to port `9090`.
