@@ -17,7 +17,7 @@
 version: 0.1
 
 # +required List of endpoints to create
-endpoints: []
+# endpoints: []
   # +required Unique name for the endpoint. (This name will be used when generating the managed API)
 # - name: Go Greeter $!23?q
 #   # +required Numeric port value that gets exposed via this endpoint
