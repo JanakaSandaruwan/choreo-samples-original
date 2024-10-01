@@ -1,8 +1,8 @@
 # +required The configuration file schema version
-# schemaVersion: 1.1
+schemaVersion: 1.1
 
 # +optional Incoming connection details for the component
-endpoints:
+endpoints_wrong:
   # +required Unique name for the endpoint.
   # This name will be used when generating the managed API
   - name: component-greeter
