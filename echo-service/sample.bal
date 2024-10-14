@@ -15,7 +15,7 @@ http:Client testClient = check new ("testUrl", {
 
 service / on new http:Listener(8090) {
     resource function post .(@http:Payload string textMsg) returns string {
-        io:println("GET request:" + testClient.toJsonString());
+        io:println("GET request:" + testClient);
         return textMsg;
     }
 }
