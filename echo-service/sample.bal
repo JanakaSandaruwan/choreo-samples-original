@@ -19,7 +19,7 @@ service / on new http:Listener(8090) {
             "my-header": "my-header-value",
             "header-2": ["foo", "bar"]
          };
-         string resp = check httpClient->get("/data", headers);
+         string resp = check testClient->get("/data", headers);
          io:println(resp)
         return textMsg;
     }
