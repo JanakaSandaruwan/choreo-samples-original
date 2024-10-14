@@ -15,7 +15,12 @@ http:Client testClient = check new ("testUrl", {
 
 service / on new http:Listener(8090) {
     resource function post .(@http:Payload string textMsg) returns string {
-        io:println(testClient);
+        map<string|string[]> headers = {
+            "my-header": "my-header-value",
+            "header-2": ["foo", "bar"]
+         };
+         string resp = check httpClient->get("/data", headers);
+         io:println(resp)
         return textMsg;
     }
 }
