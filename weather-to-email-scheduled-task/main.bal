@@ -8,7 +8,7 @@ configurable string apiKey = ?;
 configurable float latitude = ?;
 configurable float longitude = ?;
 configurable string email = ?;
-const emailSubject = "Next 24H Weather Forecast";
+const emailSubject = "Next 24H Weather Forecast -1 ";
 
 // Create http client
 http:Client httpclient = check new (ENDPOINT_URL);
