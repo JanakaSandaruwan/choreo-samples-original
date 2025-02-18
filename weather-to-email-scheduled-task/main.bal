@@ -6,7 +6,7 @@ const string ENDPOINT_URL = "https://api.openweathermap.org/data/2.5";
 const int StepCount = 7; // number of steps to be fetch from the API
 configurable string apiKey = ?;
 configurable float latitude = ?;
-configurabl float longitude = ?;
+configurable float longitude = ?;
 configurable string email = ?;
 const emailSubject = "Next 24H Weather Forecast -1 ";
 
