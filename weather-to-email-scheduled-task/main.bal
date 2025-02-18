@@ -4,7 +4,7 @@ import ballerina/io;
 
 const string ENDPOINT_URL = "https://api.openweathermap.org/data/2.5";
 const int StepCount = 7; // number of steps to be fetch from the API
-configurabl string apiKey = ?; // hi
+configurable string apiKey = ?; // hi
 configurable float latitude = ?;
 configurable float longitude = ?;
 configurable string email = ?;
