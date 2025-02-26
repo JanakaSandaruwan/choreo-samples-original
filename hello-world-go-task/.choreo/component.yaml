@@ -1,0 +1,91 @@
+# +required The configuration file schema version
+schemaVersion: 1.0
+
+configurations:
+  schema:
+    - name: Redis_Url
+      displayName: Redis URL
+      type: string #other types - integer, boolean, object, array
+      required: false # by default required is true
+    - name: DB_User
+      displayName: DB Username
+      type: string
+    - name: Is_Feature_Flag
+      displayName: Feature Flag
+      type: boolean
+    - name: version
+      type: number
+    - name: DB_Password
+      type: secret
+      displayName: DB Password
+    - name: logging
+      displayName: Logging
+      type: object
+      properties:
+        - name: package1
+          type: string
+          values: #restricted values | enum
+            - info
+            - debug
+        - name: package2
+          type: string
+    - name: wordpress
+      type: object
+      displayName: Wordpress
+      required: false
+      properties:
+        - name: menus
+          type: array
+          items:
+            type: object
+            properties:
+              - name: title
+                type: string
+              - name: description
+                type: string
+                required: false
+                displayName: Description
+              - name: time
+                type: object
+                properties:
+                  - name: start
+                    type: string
+                  - name: end
+                    type: string
+    - name: dates
+      displayName: Dates
+      required: false
+      type: array
+      items:
+        type: string
+  env:
+    - name: REDIS_URL
+      valueFrom:
+        configKeyRef:
+          name: Redis_Url
+    - name: DB_USER
+      valueFrom:
+        configKeyRef:
+          name: DB_User
+  file:
+    - name: application.yaml # other supported file types - json,toml,env,ini,properties,xml
+      mountPath: /src/resources
+      type: yaml
+      values:
+        configKeyRef:
+          - name: logging
+          - name: wordpress
+    - name: application.json # other supported file types - json,toml,env,ini,properties,xml
+      mountPath: /src/resources
+      type: json
+      values:
+        configKeyRef:
+          - name: logging
+          - name: Redis_Url
+    - name: application.toml # other supported file types - json,toml,env,ini,properties,xml
+      mountPath: /src/resources
+      type: toml
+      values:
+        configKeyRef:
+          - name: logging
+          - name: wordpress
