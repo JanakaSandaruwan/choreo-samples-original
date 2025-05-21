@@ -257,6 +257,11 @@ The Service opens on a separate page where you can see its overview.
       </p>
       </details>
 
+    ---
+    **Note on Production Databases:**
+    While this sample guides you to set up a MySQL database (potentially locally or self-hosted) for demonstration, for production environments in Choreo, it is highly recommended to use a managed cloud database service (e.g., Amazon RDS, Azure Database for MySQL, Google Cloud SQL). You would then configure your Choreo components with the connection details (host, port, username, password, database name) for your managed database instance as Choreo Secrets/ConfigMaps. This ensures scalability, reliability, and easier maintenance.
+    ---
+
     &nbsp;<br>
     - To send emails to users, the channel service connects with the email service. You can specify the email service's URL.
    
@@ -264,7 +269,7 @@ The Service opens on a separate page where you can see its overview.
 
         | Field      |  Value |
         | ---------- | -------- |
-        | emailService     | Email Service URL. eg: http://email-service-yxp-3612627279:9090/  |
+        | emailService     | Email Service URL. Get this **Project URL** from the **Overview page of your deployed 'Email Service' component** in the Choreo Console. (e.g., `http://<internal-id>:<port>/`) |
 
     &nbsp;<br>
 
@@ -365,6 +370,11 @@ The Service opens on a separate page where you can see its overview.
       </p>
       </details>
 
+    ---
+    **Note on Production Databases:**
+    While this sample guides you to set up a MySQL database (potentially locally or self-hosted) for demonstration, for production environments in Choreo, it is highly recommended to use a managed cloud database service (e.g., Amazon RDS, Azure Database for MySQL, Google Cloud SQL). You would then configure your Choreo components with the connection details (host, port, username, password, database name) for your managed database instance as Choreo Secrets/ConfigMaps. This ensures scalability, reliability, and easier maintenance.
+    ---
+
     &nbsp;<br>
     - To send emails to users, the pet management service connects with the email service. You can specify the email service's URL.
    
@@ -372,7 +382,7 @@ The Service opens on a separate page where you can see its overview.
 
         | Field      |  Value |
         | ---------- | -------- |
-        | emailService     | Email Service URL. eg: http://email-service-yxp-3612627279:9090/  |
+        | emailService     | Email Service URL. Get this **Project URL** from the **Overview page of your deployed 'Email Service' component** in the Choreo Console. (e.g., `http://<internal-id>:<port>/`) |
 
     &nbsp;<br>
 
@@ -640,14 +650,14 @@ A management application must be created in order to use the Asagrdeo management
         - Copy and paste the value of the **Consumer Secret**.
       
     - PET_MANAGEMENT_SERVICE_URL
-        - Open the **Pet Management Service** you created previously via **Developer Portal**.
-        - In the **Overview** section of the API, you can find the **Endpoint(s)**.
-        - Copy and paste the value of On the **Endpoint(s)** section.
+        - This is the invokable URL for the 'Pet Management Service'. 
+        - If the web app consumes this as an **external API published on the Developer Portal**, use the API Endpoint from the Developer Portal (found in the Overview section of the API in the DevPortal).
+        - If this is for **internal service-to-service communication within the same Choreo project/organization (less likely for a frontend, but good to be precise for backend configs)**, you would use the **Project URL** found on the Overview page of the 'Pet Management Service' component in the Choreo Console. For frontend consumption, it's typically the public API URL from the Developer Portal.
 
     - CHANNELLING_SERVICE_URL
-        - Open the **Channel Service** you created previously via **Developer Portal**.
-        - In the **Overview** section of the API, you can find the **Endpoint(s)**.
-        - Copy and paste the value of On the **Endpoint(s)** section.
+        - This is the invokable URL for the 'Channel Service'.
+        - If the web app consumes this as an **external API published on the Developer Portal**, use the API Endpoint from the Developer Portal (found in the Overview section of the API in the DevPortal).
+        - If this is for **internal service-to-service communication within the same Choreo project/organization**, you would use the **Project URL** found on the Overview page of the 'Channel Service' component in the Choreo Console. For frontend consumption, it's typically the public API URL from the Developer Portal.
 
     - HOSTED_URL
         - Use **Web App URL** in the step 3.2.

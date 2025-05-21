@@ -1,43 +1,95 @@
 # .NET Greeter Service
-Sample .NET service that exposes a REST API to greet a user.
 
-## Repository File Structure
+## 1. Sample Overview
 
-The below table gives a brief overview of the important files in the greeter service.\
-Note: The following file paths are relative to the path /dotnet/greeter
+This sample provides a .NET service that exposes a simple REST API to greet a user. It demonstrates deploying a .NET application on Choreo using either the .NET buildpack or a Dockerfile. The service has an endpoint `/greeter/greet` that takes a name query parameter.
 
-| Filepath               | Description                                                                                                                                                          |
-| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Program.cs             | The .NET-based Greeter service code.                                                                                                                                 |
-| Dockerfile             | Choreo uses the Dockerfile to build the container image of the application.                                                                                          |
-| .choreo/endpoints.yaml | Choreo-specific configuration that provides information about how Choreo exposes the service.                                                                        |
-| openapi.yaml           | OpenAPI contract of the greeter service. This is needed to publish our service as a managed API. This openapi.yaml file is referenced by the .choreo/endpoints.yaml. |
+## 2. Prerequisites
 
-## Getting started
+*   **Language Runtime:** .NET SDK (e.g., .NET 7.x as specified in original docs).
+*   **Tools:** Git, curl or Postman.
+*   **Choreo Account:** Access to the Choreo console.
+*   **(Optional) Docker:** If you prefer to build and run with Docker locally.
 
-Please refer to the Choreo documentation under the [Develop an Application with Buildpacks](https://wso2.com/choreo/develop-components/deploy-an-application-with-buildpacks) to learn how to deploy the application.
+## 3. Local Development & Testing
 
-1. Select `Service` Card from Component Creation Wizard
-2. Select `.NET` as the buildpack. Fill as follow according to selected Buildpack.
-
-    | **Field**             | **Description**                               |
-    |-----------------------|-----------------------------------------------|
-    | Name           | Greeting Service              |
-    | Description    | greeting service       |
-    | **GitHub Account**    | Your account                                  |
-    | **GitHub Repository** | choreo-samples |
-    | **Branch**            | **`main`**                               |
-    | **Buildpack**      | .NET |
-    | **Select Go Project Directory**       | dotnet-greeter |
-    | **Select Language Version**              | 7.x |
-
-3. Click Create. Once the component creation is complete, you will see the component overview page.
-4. Deploy the created component
-
-## Testing the Application
-
-Invoke the following endpoint to test the application. Make sure to change the `<endpoint-url>` to the URL of the deployed component.
-
+### 3.1. Clone the Repository
+```bash
+git clone https://github.com/wso2/choreo-samples.git
+cd choreo-samples/dotnet-greeter
 ```
-curl -X GET <endpoint-url>/greeter/greet?name=John
+
+### 3.2. Install Dependencies
+*Dependencies are typically managed by the .NET SDK and defined in the `.csproj` file. No explicit install command is usually needed unless there are project-specific tools.*
+
+### 3.3. Run the Application
+```bash
+dotnet run
 ```
+*This command builds and runs the application. It will typically host the service on a local port (e.g., `http://localhost:5000` or `https://localhost:5001`). Check the console output for the exact URLs.*
+
+### 3.4. Test Locally
+*Use curl or your browser:*
+```bash
+curl "http://localhost:<port>/greeter/greet?name=Developer"
+```
+*(Replace `<port>` with the actual port the application is running on, e.g., 5000 or 5278 as seen in launchSettings.json for HTTP)*
+
+### 3.5. (Alternative) Build and Run with Docker Locally
+*This sample includes a `Dockerfile`.*
+```bash
+# Ensure you are in the dotnet-greeter directory
+docker build -t dotnet-greeter-sample .
+docker run -p 8080:8080 dotnet-greeter-sample 
+```
+*(Adjust port mapping if your Dockerfile exposes a different port than 8080. The provided Dockerfile exposes 8080).*
+Then test using `curl "http://localhost:8080/greeter/greet?name=DockerUser"`.
+
+## 4. Choreo Deployment
+
+### 4.1. Create Component
+1.  Navigate to the Choreo Console and select your project.
+2.  Click **+ Create** or **Create Component**.
+3.  Select Component Type: **Service**.
+4.  Enter a **Name** (e.g., `DotNetGreetingService`) and **Description** (e.g., `Greeter service in .NET`).
+
+### 4.2. Connect Repository
+1.  **GitHub Account:** Your GitHub account.
+2.  **GitHub Repository:** `choreo-samples` (or your fork).
+3.  **Branch:** `main`.
+4.  **Buildpack:** **.NET** (Alternatively, you can choose **Dockerfile**).
+5.  **(If .NET Buildpack) .NET Project Directory:** `dotnet-greeter`.
+6.  **(If .NET Buildpack) .NET Version:** `7.x`.
+7.  **(If Dockerfile) Dockerfile Path:** `dotnet-greeter/Dockerfile`.
+8.  **(If Dockerfile) Docker Context Path:** `dotnet-greeter`.
+9.  Click **Create**.
+
+### 4.3. Configure Endpoints & Configurations
+1.  **Endpoints:**
+    *   Choreo should auto-detect the endpoint based on your `openapi.yaml` (e.g., `/greeter/greet`).
+    *   The service port defined in the Dockerfile (e.g., 8080) or the default for .NET applications in Choreo will be used. The `openapi.yaml` specifies port 8080.
+2.  **Configurations:**
+    *   This simple service likely requires no special environment variables.
+
+### 4.4. Build and Deploy
+1.  Go to the **Build** page and click **Build**.
+2.  Once successful, go to the **Deploy** page.
+3.  Click **Configure & Deploy** (or **Deploy**).
+4.  Select the environment and deploy.
+
+## 5. Testing on Choreo
+
+*   Use the **OpenAPI Console** in Choreo or `curl`:
+    ```bash
+    curl "https://<your-choreo-service-url>/greeter/greet?name=ChoreoUser"
+    ```
+
+## 6. Repository File Structure Overview
+
+*   `Program.cs`: The .NET service code.
+*   `Dockerfile`: Used by Choreo (if Dockerfile buildpack is chosen) to build the container image.
+*   `.choreo/endpoints.yaml`: Choreo-specific configuration for service exposure (often auto-generated or can be customized).
+*   `openapi.yaml`: OpenAPI contract for the service, used for API management and testing.
+
+---
+*This README provides options for both .NET buildpack and Dockerfile deployment on Choreo.*
